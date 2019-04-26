@@ -4,7 +4,10 @@
   "description": "Bot which helps you share checks&bills with your friends",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node build/src/index.js",
+    "clean": "rimraf coverage build tmp",
+    "build": "tsc -p tsconfig.release.json",
+    "build:watch": "tsc -w -p tsconfig.release.json"
   },
   "keywords": [
     "telegram",
@@ -14,5 +17,8 @@
   "license": "MIT",
   "dependencies": {
     "telegraf": "^3.29.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.4.5"
   }
 }
