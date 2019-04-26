@@ -1,0 +1,18 @@
+{
+  "name": "divider-telegram-bot",
+  "version": "1.0.0",
+  "description": "Bot which helps you share checks&bills with your friends",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "telegram",
+    "chat-bot"
+  ],
+  "author": "PinkiNice",
+  "license": "MIT",
+  "dependencies": {
+    "telegraf": "^3.29.0"
+  }
+}
