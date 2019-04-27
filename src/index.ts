@@ -1,7 +1,15 @@
+import mongoose from 'mongoose';
 import { token } from './config';
 import { BillySharer } from './bot';
+import { Api } from './api';
+import { getDbConnection } from './db';
 
 
-const bot  = new BillySharer(token);
+async function main() : void {
+  let connection = await getDbConnection();
+  let api = new Api(connection);
 
-console.log(bot);
+  let bot = new BillySharer(token, api);
+}
+
+main();
