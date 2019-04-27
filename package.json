@@ -16,6 +16,7 @@
   "author": "PinkiNice",
   "license": "MIT",
   "dependencies": {
+    "mongoose": "^5.5.4",
     "telegraf": "^3.29.0"
   },
   "devDependencies": {
