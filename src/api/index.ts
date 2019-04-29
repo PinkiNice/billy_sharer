@@ -1,9 +1,5 @@
-import mongoose from 'mongoose';
-
-mongoose.connect('mongodb://localhost/my_database', {useNewUrlParser: true});
-
 export class Api {
-  mongo : any;
+  mongo: any;
 
   constructor(mongo: any) {
     this.mongo = mongo;

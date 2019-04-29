@@ -4,7 +4,7 @@
   "description": "Bot which helps you share checks&bills with your friends",
   "main": "index.js",
   "scripts": {
-    "start": "node build/src/index.js",
+    "start": "npm run build && node build/src/index.js",
     "clean": "rimraf coverage build tmp",
     "build": "tsc -p tsconfig.release.json",
     "build:watch": "tsc -w -p tsconfig.release.json"
@@ -20,6 +20,7 @@
     "telegraf": "^3.29.0"
   },
   "devDependencies": {
+    "tslib": "^1.9.3",
     "typescript": "^3.4.5"
   }
 }

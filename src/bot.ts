@@ -2,7 +2,7 @@ import Telegraf, { ContextMessageUpdate } from 'telegraf';
 import { Api } from './api';
 
 export class BillySharer {
-  instance : Telegraf<ContextMessageUpdate>;
+  instance: Telegraf<ContextMessageUpdate>;
   token: string;
   api: Api;
 
@@ -20,9 +20,18 @@ export class BillySharer {
   }
 
   __setHooks() {
-    this.instance.on('message', (ctx) => {
-      console.log(ctx);
-      this.api.addUser(ctx);
-    })
+    this.instance.start(ctx => {
+      ctx.reply('Welcome!');
+    });
+
+    // this.instance.on('message', ctx => {
+    //   console.log(ctx);
+    //   this.api.addUser(ctx);
+    // });
+  }
+
+  run() {
+    console.log('Bot instance is running');
+    this.instance.launch();
   }
 }
