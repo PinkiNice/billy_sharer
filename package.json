@@ -2,12 +2,14 @@
   "name": "divider-telegram-bot",
   "version": "1.0.0",
   "description": "Bot which helps you share checks&bills with your friends",
-  "main": "index.js",
+  "main": "build/src/index.js",
   "scripts": {
     "start": "npm run build && node build/src/index.js",
+    "dev": "npm run build && npm-run-all --parallel watch:build watch:server",
     "clean": "rimraf coverage build tmp",
     "build": "tsc -p tsconfig.release.json",
-    "build:watch": "tsc -w -p tsconfig.release.json"
+    "watch:build": "tsc -w -p tsconfig.release.json",
+    "watch:server": "nodemon --watch build"
   },
   "keywords": [
     "telegram",
@@ -20,6 +22,7 @@
     "telegraf": "^3.29.0"
   },
   "devDependencies": {
+    "npm-run-all": "^4.1.5",
     "tslib": "^1.9.3",
     "typescript": "^3.4.5"
   }
