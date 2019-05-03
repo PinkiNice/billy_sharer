@@ -1,13 +1,11 @@
-import { token } from './config';
-import { BillySharer } from './bot';
-import { Api } from './api';
 import { getDbConnection } from './db';
+import { BillySharer } from './bot';
+import { token } from './config';
 
 async function main() {
   let connection = await getDbConnection();
-  let api = new Api(connection);
 
-  let bot = new BillySharer(token, api);
+  let bot = new BillySharer(token);
   bot.run();
 }
 
