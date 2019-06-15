@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
+import { IUser } from '@/db/typings';
 
-type UserType = {
-  id: number;
-  username: string;
-  friends: Array<UserType>;
-};
-
-let userSchema = new mongoose.Schema({
-  id: Number,
+const userSchema = new mongoose.Schema({
+  id: {
+    type: Number,
+    index: {
+      unique: true,
+    },
+  },
   username: {
     type: String,
     lowercase: true,
@@ -24,6 +24,14 @@ let userSchema = new mongoose.Schema({
       default: [],
     },
   ],
-}) as UserType;
+  purchases: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Purchase',
+      required: false,
+      default: [],
+    },
+  ],
+}) as IUser;
 
-export let User = mongoose.model('User', userSchema);
+export const User = mongoose.model('User', userSchema);

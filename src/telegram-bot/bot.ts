@@ -1,8 +1,12 @@
-import Telegraf, { ContextMessageUpdate, Context } from 'telegraf';
-import { getUser, getUserByUsername, getAllUsers } from './api';
+import Telegraf, { ContextMessageUpdate, Context, Telegram } from 'telegraf';
+import { getUser, getUserByUsername, getAllUsers } from '../api';
+import { User, InlineQuery } from 'telegram-typings';
 
 interface StatefulContextMessageUpdate extends ContextMessageUpdate {
-  state: any;
+  state: {
+    mentionedUsers: Array<User>;
+    user: User;
+  };
 }
 
 enum MessageEntity {
@@ -69,6 +73,7 @@ const MentionsMiddleware = async function(
 export class BillySharer {
   instance: Telegraf<StatefulContextMessageUpdate>;
   token: string;
+  telegram: Telegram;
 
   constructor(token: string) {
     this.token = token;
@@ -78,7 +83,9 @@ export class BillySharer {
 
   __init(token: string) {
     this.instance = new Telegraf(token);
-    //this.instance.telegram.sendMessage(74169393, 'Restared!');
+    this.telegram = this.instance.telegram;
+
+    this.telegram.sendMessage(74169393, 'Restared!');
 
     getAllUsers().then(console.log);
     this.__setMiddlewares();
@@ -90,6 +97,9 @@ export class BillySharer {
   }
 
   __setHooks() {
+    this.instance.on('callback_query', something => {
+      console.log(something);
+    });
     this.instance.on('message', ctx => {
       ctx.reply(`received from, ${ctx.state.user.username}`);
     });
@@ -112,4 +122,12 @@ export class BillySharer {
     console.log('Bot instance is running');
     this.instance.launch();
   }
+
+  sendContactRequest(from: User, to: User) {
+    //this.telegram.sendMessage(to.id, )
+    this.telegram.sendMessage(from.id, 'Your request is sent');
+    //this.telegram.sendMessage(to.)
+  }
+
+  handleContactRequestResponse(response: InlineQuery) {}
 }

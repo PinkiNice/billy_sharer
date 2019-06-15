@@ -1,5 +1,5 @@
 import { getDbConnection } from './db';
-import { BillySharer } from './bot';
+import { BillySharer } from './telegram-bot/bot';
 import { token } from './config';
 
 async function main() {
